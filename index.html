@@ -365,6 +365,13 @@
         return;
       }
 
+      // Guard: URL not configured yet
+      if (SCRIPT_URL === 'SEU_SCRIPT_URL_AQUI') {
+        errorMsg.textContent = 'Configuração pendente: substitua SEU_SCRIPT_URL_AQUI pela URL do seu Google Apps Script.';
+        errorMsg.style.display = 'block';
+        return;
+      }
+
       btn.disabled = true;
       btn.textContent = 'Enviando...';
       errorMsg.style.display = 'none';
