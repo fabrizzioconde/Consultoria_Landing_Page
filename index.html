@@ -76,6 +76,176 @@
       color: var(--accent-green);
       font-weight: 500;
     }
+
+    .form-section {
+      padding: 0 24px 80px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .form-card {
+      background: var(--bg-card);
+      border-radius: 12px;
+      padding: 40px;
+      width: 100%;
+      max-width: 640px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .form-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+
+    .form-subtitle {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 28px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .field--full {
+      margin-bottom: 16px;
+    }
+
+    .field--half {
+      max-width: 300px;
+      margin-bottom: 24px;
+    }
+
+    label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    input, select, textarea {
+      background: var(--bg-main);
+      border: 1px solid var(--border-input);
+      border-radius: var(--radius);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      padding: 10px 14px;
+      transition: border-color 0.2s;
+      outline: none;
+      width: 100%;
+    }
+
+    input::placeholder, textarea::placeholder {
+      color: #4a5a7a;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--accent-green);
+    }
+
+    select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23aab8c9' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+    }
+
+    select option {
+      background: var(--bg-card);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .error-msg {
+      background: rgba(255, 80, 80, 0.1);
+      border: 1px solid rgba(255, 80, 80, 0.3);
+      border-radius: var(--radius);
+      color: #ff6b6b;
+      font-size: 13px;
+      padding: 12px 16px;
+      margin-bottom: 16px;
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 14px;
+      background: var(--gradient);
+      border: none;
+      border-radius: 30px;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.1s;
+    }
+
+    .btn-submit:hover { opacity: 0.9; }
+    .btn-submit:active { transform: scale(0.99); }
+    .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .success-card {
+      background: var(--bg-card);
+      border-radius: 12px;
+      padding: 60px 40px;
+      width: 100%;
+      max-width: 640px;
+      text-align: center;
+      border: 1px solid rgba(0, 212, 170, 0.2);
+      animation: fadeIn 0.4s ease;
+    }
+
+    .success-icon {
+      width: 64px;
+      height: 64px;
+      background: var(--gradient);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      color: #fff;
+      margin: 0 auto 20px;
+    }
+
+    .success-card h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .success-card p {
+      color: var(--text-secondary);
+      font-size: 15px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .form-card { padding: 28px 20px; }
+      .field--half { max-width: 100%; }
+      .hero__subtitle br { display: none; }
+    }
   </style>
 </head>
 <body>
@@ -93,6 +263,83 @@
     </div>
   </header>
 
-  <!-- formulário — próxima tarefa -->
+  <main class="form-section">
+    <div class="form-card" id="form-container">
+      <h2 class="form-title">Solicite uma Proposta</h2>
+      <p class="form-subtitle">Preencha o formulário e entraremos em contato em até 2 dias úteis.</p>
+
+      <form id="contact-form" novalidate>
+        <div class="form-grid">
+          <div class="field">
+            <label for="nome">Nome completo *</label>
+            <input type="text" id="nome" name="nome" placeholder="João Silva" required />
+          </div>
+          <div class="field">
+            <label for="email">E-mail *</label>
+            <input type="email" id="email" name="email" placeholder="joao@empresa.com" required />
+          </div>
+          <div class="field">
+            <label for="empresa">Empresa *</label>
+            <input type="text" id="empresa" name="empresa" placeholder="Nome da empresa" required />
+          </div>
+          <div class="field">
+            <label for="cargo">Cargo *</label>
+            <input type="text" id="cargo" name="cargo" placeholder="Ex: Diretor de Operações" required />
+          </div>
+          <div class="field">
+            <label for="porte">Porte da empresa *</label>
+            <select id="porte" name="porte" required>
+              <option value="">Selecione...</option>
+              <option value="Microempresa">Microempresa (até 9 funcionários)</option>
+              <option value="Pequena">Pequena (10–49 funcionários)</option>
+              <option value="Média">Média (50–249 funcionários)</option>
+              <option value="Grande">Grande (250–999 funcionários)</option>
+              <option value="Multinacional">Multinacional (1.000+)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="area">Área de atuação *</label>
+            <select id="area" name="area" required>
+              <option value="">Selecione...</option>
+              <option value="Indústria">Indústria</option>
+              <option value="Varejo">Varejo</option>
+              <option value="Finanças">Finanças</option>
+              <option value="Logística">Logística</option>
+              <option value="Saúde">Saúde</option>
+              <option value="Agronegócio">Agronegócio</option>
+              <option value="Outro">Outro</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field field--full">
+          <label for="problema">Descreva o problema ou necessidade *</label>
+          <textarea id="problema" name="problema" rows="4"
+            placeholder="Ex: Precisamos otimizar nossa cadeia de distribuição para reduzir custos logísticos em 15%..." required></textarea>
+        </div>
+
+        <div class="field field--half">
+          <label for="orcamento">Orçamento estimado</label>
+          <select id="orcamento" name="orcamento">
+            <option value="A definir">A definir / Não sei ainda</option>
+            <option value="Até R$5.000">Até R$5.000</option>
+            <option value="R$5.000–20.000">R$5.000 – R$20.000</option>
+            <option value="R$20.000–50.000">R$20.000 – R$50.000</option>
+            <option value="Acima de R$50.000">Acima de R$50.000</option>
+          </select>
+        </div>
+
+        <div id="error-message" class="error-msg" style="display:none;"></div>
+
+        <button type="submit" id="submit-btn" class="btn-submit">Solicitar Proposta</button>
+      </form>
+    </div>
+
+    <div id="success-message" class="success-card" style="display:none;">
+      <div class="success-icon">✓</div>
+      <h2>Obrigado!</h2>
+      <p>Recebemos seu contato e retornaremos em breve.</p>
+    </div>
+  </main>
 </body>
 </html>
