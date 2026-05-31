@@ -341,5 +341,67 @@
       <p>Recebemos seu contato e retornaremos em breve.</p>
     </div>
   </main>
+
+  <script>
+    /*
+     * ============================================================
+     *  CONFIGURAÇÃO — substitua pela URL do seu Google Apps Script
+     * ============================================================
+     *  Instruções de setup no Task 5 deste plano de implementação.
+     * ============================================================
+     */
+    const SCRIPT_URL = 'SEU_SCRIPT_URL_AQUI';
+
+    document.getElementById('contact-form').addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const form = e.target;
+      const btn = document.getElementById('submit-btn');
+      const errorMsg = document.getElementById('error-message');
+
+      // Validação nativa do browser
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'Enviando...';
+      errorMsg.style.display = 'none';
+
+      const payload = {
+        nome:      document.getElementById('nome').value.trim(),
+        email:     document.getElementById('email').value.trim(),
+        empresa:   document.getElementById('empresa').value.trim(),
+        cargo:     document.getElementById('cargo').value.trim(),
+        porte:     document.getElementById('porte').value,
+        area:      document.getElementById('area').value,
+        problema:  document.getElementById('problema').value.trim(),
+        orcamento: document.getElementById('orcamento').value,
+      };
+
+      try {
+        // mode: 'no-cors' é necessário para evitar erros de CORS com Google Apps Script.
+        // A resposta será opaca (não legível), então exibimos sucesso logo após o fetch.
+        await fetch(SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+
+        document.getElementById('form-container').style.display = 'none';
+        document.getElementById('success-message').style.display = 'flex';
+        document.getElementById('success-message').style.flexDirection = 'column';
+        document.getElementById('success-message').style.alignItems = 'center';
+
+      } catch (err) {
+        errorMsg.textContent = 'Não foi possível enviar. Verifique sua conexão e tente novamente.';
+        errorMsg.style.display = 'block';
+        btn.disabled = false;
+        btn.textContent = 'Solicitar Proposta';
+      }
+    });
+  </script>
 </body>
 </html>
