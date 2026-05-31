@@ -28,9 +28,71 @@
       color: var(--text-primary);
       min-height: 100vh;
     }
+
+    .hero {
+      text-align: center;
+      padding: 64px 24px 48px;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .hero__logo {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent-green);
+      margin-bottom: 24px;
+    }
+
+    .hero__headline {
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+    }
+
+    .hero__subtitle {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+    }
+
+    .hero__chips {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .chip {
+      background: var(--bg-card);
+      border: 1px solid rgba(0, 212, 170, 0.2);
+      border-radius: 20px;
+      padding: 6px 16px;
+      font-size: 13px;
+      color: var(--accent-green);
+      font-weight: 500;
+    }
   </style>
 </head>
 <body>
-  <!-- conteúdo nas próximas tarefas -->
+  <header class="hero">
+    <div class="hero__logo">Consultoria MM</div>
+    <h1 class="hero__headline">Decisões melhores.<br />Resultados superiores.</h1>
+    <p class="hero__subtitle">
+      Construímos modelos matemáticos personalizados para otimizar recursos,<br />
+      prever cenários e embasar decisões estratégicas.
+    </p>
+    <div class="hero__chips">
+      <span class="chip">✓ Otimização</span>
+      <span class="chip">✓ Previsão</span>
+      <span class="chip">✓ Simulação</span>
+    </div>
+  </header>
+
+  <!-- formulário — próxima tarefa -->
 </body>
 </html>
