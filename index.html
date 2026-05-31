@@ -249,6 +249,86 @@
   </style>
 </head>
 <body>
+  <!--
+=======================================================================
+ SETUP DO GOOGLE APPS SCRIPT — LEIA ANTES DE USAR
+=======================================================================
+
+PASSO 1 — Criar a planilha
+  1. Acesse https://sheets.google.com e crie uma nova planilha
+  2. Renomeie a aba para "Leads" (opcional, mas recomendado)
+  3. Na linha 1, crie os seguintes cabeçalhos (exatamente nesta ordem):
+     A1: Timestamp
+     B1: Nome
+     C1: Email
+     D1: Empresa
+     E1: Cargo
+     F1: Porte
+     G1: Área
+     H1: Problema
+     I1: Orçamento
+
+PASSO 2 — Criar o Apps Script
+  1. Na planilha, clique em Extensões → Apps Script
+  2. Apague todo o código existente
+  3. Cole o código abaixo (entre as linhas tracejadas)
+
+--------------------------------------------------------------------
+function doPost(e) {
+  try {
+    var data = JSON.parse(e.postData.contents);
+    var sheet = SpreadsheetApp
+                  .getActiveSpreadsheet()
+                  .getSheetByName('Leads') || SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+
+    sheet.appendRow([
+      new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' }),
+      data.nome     || '',
+      data.email    || '',
+      data.empresa  || '',
+      data.cargo    || '',
+      data.porte    || '',
+      data.area     || '',
+      data.problema || '',
+      data.orcamento || 'Não informado'
+    ]);
+
+    return ContentService
+      .createTextOutput(JSON.stringify({ status: 'success' }))
+      .setMimeType(ContentService.MimeType.JSON);
+
+  } catch (err) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ status: 'error', message: err.toString() }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+--------------------------------------------------------------------
+
+PASSO 3 — Publicar como Web App
+  1. Clique em Implantar → Nova implantação
+  2. Tipo: "Aplicativo da web"
+  3. Executar como: "Eu mesmo (seu e-mail)"
+  4. Quem tem acesso: "Qualquer pessoa"
+  5. Clique em "Implantar" e autorize as permissões solicitadas
+  6. Copie a URL gerada (começa com https://script.google.com/macros/s/...)
+
+PASSO 4 — Configurar esta página
+  1. Neste arquivo index.html, localize a linha:
+       const SCRIPT_URL = 'SEU_SCRIPT_URL_AQUI';
+  2. Substitua 'SEU_SCRIPT_URL_AQUI' pela URL copiada no passo anterior
+  3. Salve o arquivo
+
+PASSO 5 — Testar
+  1. Abra index.html no browser
+  2. Preencha e envie o formulário
+  3. Verifique se uma nova linha apareceu na sua planilha Google Sheets
+
+ATENÇÃO: A cada vez que você editar o código do Apps Script, clique em
+  Implantar → Gerenciar implantações → Editar → "Nova versão" → Implantar.
+  Usar "Versão HEAD" em produção não é recomendado.
+=======================================================================
+-->
   <header class="hero">
     <div class="hero__logo">Consultoria MM</div>
     <h1 class="hero__headline">Decisões melhores.<br />Resultados superiores.</h1>
